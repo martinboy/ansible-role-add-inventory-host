@@ -6,10 +6,10 @@
     variables_dict: {}
   set_fact: 
     variables_dict: "{{ variables_dict | combine( { item.key: item.value } ) }}"
-  with_items: "{{ add_host_inventory_vars }}"
+  with_items: "{{ add_inventory_host_inventory_vars }}"
 
 - name: configure | Check required variables
-  fail: msg="The required variable '{{item}}' is not set in 'add_host_inventory_vars' list or blank."
+  fail: msg="The required variable '{{item}}' is not set in 'add_inventory_host_inventory_vars' list or blank."
   when: "(variables_dict['{{ item }}'] is undefined) or (variables_dict['{{ item }}'] == '')"
   with_items: 
     - host_name

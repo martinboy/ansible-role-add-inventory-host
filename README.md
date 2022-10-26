@@ -79,7 +79,7 @@ Example Playbook
 
   pre_tasks:
     - set_fact: 
-        add_host_inventory_vars: 
+        add_inventory_host_inventory_vars: 
           - { key: host_name, value: "{{ host_name }}" }
           - { key: ansible_ssh_host, value: "{{ ansible_ssh_host }}" }
           - { key: ansible_ssh_user, value: "{{ ansible_ssh_user }}" }
@@ -103,7 +103,7 @@ Example Playbook
 
 
   roles:
-    - { role: add_host, add_host_file: "{{ inventory_dir }}/hosts" }
+    - { role: martinboy.add-inventory-host, add_inventory_host_file: "{{ inventory_dir }}/hosts" }
 ```
 
 License
