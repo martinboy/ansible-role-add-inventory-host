@@ -1,0 +1,4 @@
+---
+# include all role tasks here
+- include_tasks: _configure.yml
+- include_tasks: add.yml

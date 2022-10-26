@@ -1,0 +1,5 @@
+---
+# include role entry point task when role is enabled
+- include_tasks: _run.yml
+  when: add_inventory_host_enabled
+  tags: []

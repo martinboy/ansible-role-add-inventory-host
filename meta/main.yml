@@ -1,0 +1,16 @@
+galaxy_info:
+  role_name: add_inventory_host
+  author: Alexander Martinkevich Martinboy
+  description: Ansible role to simplify adding ansible inventory host items on the localhost
+
+  issue_tracker_url: https://github.com/martinboy/ansible-role-add-inventory-host/issues
+
+  license: See LICENSE
+
+  min_ansible_version: 2.x
+
+  platforms: []
+
+  galaxy_tags: []
+
+dependencies: []

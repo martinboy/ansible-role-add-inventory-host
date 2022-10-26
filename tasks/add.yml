@@ -1,0 +1,28 @@
+---
+
+- name: Create tmp file
+  shell: mktemp
+  register: mktemp
+
+- name: Write vars to tmp file - write host name
+  shell: "python -c 'print \"{{ item.value }}\" + ({{ add_host_value_chars_count }}-{{ item.value | length}})*\" \"' >> {{ mktemp.stdout }}"
+  when: item.key == 'host_name'
+  with_items: "{{ add_host_inventory_vars }}"
+
+- name: Write vars to tmp file - write remaining vars
+  shell: "python -c 'print \"{{ item.key }}={{ item.value }}\" + ({{ add_host_value_chars_count }}-{{ host_name | length}})*\" \"' >> {{ mktemp.stdout }}"
+  when: item.key != 'host_name' and item.value != ''
+  with_items: "{{ add_host_inventory_vars }}"
+
+- name: Prepare for display
+  shell: "python -c 'f = open(\"{{ mktemp.stdout }}\"); print f.read().replace(\"\\n\", \" \"); f.close()'"
+  register: tmpcontent
+
+- name: Remove tmp file
+  file: name={{ mktemp.stdout }} state=absent
+
+- name: Modify inventory file
+  lineinfile:
+    dest: "{{ add_host_file }}"
+    regexp: "^{{ host_name | replace('.', '\\.') }}\\s+"
+    line: "{{ tmpcontent.stdout | trim }}"

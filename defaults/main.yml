@@ -1,0 +1,15 @@
+---
+# Default values for role variables
+add_host_enabled: yes                 # Enable the role
+add_host_file: "{{ inventory_file }}" # The inventory file to modify
+add_host_value_chars_count: 30        # The inventory item parameter length
+
+# Inventory item parameters
+add_host_inventory_vars:
+  - { key: host_name, value: "" }
+  - { key: ansible_ssh_host, value: "" }
+  - { key: ansible_ssh_user, value: "root" }
+  - { key: ansible_become_user, value: "" }
+  - { key: ansible_become_pass, value: "" }
+  - { key: ansible_ssh_port, value: "22" }
+  - { key: ansible_ssh_private_key_file, value: "" }
